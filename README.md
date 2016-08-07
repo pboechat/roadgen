@@ -43,6 +43,11 @@ Add GlobalSeeder to a game object in your scene to control pseudo-random number 
 
 ##### Road Network Generation
 
+		using System.Collections.Generic;
+		using RoadGen;
+
+		(...)
+
 		List<Segment> segments;
 		RoadGen.Quadtree quadtree;
 		RoadNetworkGenerator.DebugData debugData;
@@ -51,7 +56,12 @@ Add GlobalSeeder to a game object in your scene to control pseudo-random number 
 
 ##### Road Network Traversal
 
-###### Direct
+###### Standard segment visitor
+
+		using System.Collections.Generic;
+		using RoadGen;
+
+		(...)
 
 		HashSet<Segment> visited = new HashSet<Segment>();
 		foreach (var segment in segments)
@@ -63,7 +73,12 @@ Add GlobalSeeder to a game object in your scene to control pseudo-random number 
 			mask, 
 			ref visited);
 			
-###### Per-Traversal Parameter (Context)
+###### Segment visitor w/ per-traversal parameter (Context)
+
+		using System.Collections.Generic;
+		using RoadGen;
+
+		(...)
 
 		struct MyContext
 		{
@@ -89,7 +104,12 @@ Add GlobalSeeder to a game object in your scene to control pseudo-random number 
 				RoadNetworkTraversal.HIGHWAYS_MASK | RoadNetworkTraversal.STREETS_MASK, 
 				ref visited);
 
-###### Per-Segment Parameter (User Data)
+###### Segment visitor w/ per-segment parameter (User Data)
+
+		using System.Collections.Generic;
+		using RoadGen;
+
+		(...)
 
 		struct MyContext
 		{
@@ -125,6 +145,13 @@ Add GlobalSeeder to a game object in your scene to control pseudo-random number 
 
 ##### Road Network Geometry Construction
 
+		using UnityEngine;
+		using System.Collections.Generic;
+		using System.Linq;
+		using RoadGen;
+
+		(...)
+
 		var geometry = RoadNetworkGeometryBuilder.Build(
             scale,
             Config.highwaySegmentWidth,
@@ -151,10 +178,16 @@ Add GlobalSeeder to a game object in your scene to control pseudo-random number 
         mesh.uv = geometry.GetCrossingUvs().ToArray();
         mesh.RecalculateNormals();
 		
-##### Custom Terrain
+##### Custom Heightmap
 
-**TODO**
+Extend RoadGen.IHeightmap and implement:
+
+		float GetHeight(float x, float y);
+		
+		bool Finished();
 
 ##### Custom Allotment Builder
 
-**TODO**
+Extend RoadGen.IAllotmentBuilder and implement:
+
+		GameObject Build(Allotment allotment, IHeightmap heightmap);
