@@ -25,7 +25,40 @@ It features:
 
 ![Generation Parameters](http://www.pedroboechat.com/images/roadgen-RoadNetwork.png)
 
-**TODO**
+- _Quadtree Params_: The min. coordinates and size of the quatree (in world units) in which the road segments are put to optimize collision detections.
+
+- _Quadtree Max Objects/Levels_: Some other control parameters for the quadtree (max. number of items per quadrant and max. number of quadtree levels).
+
+- _Segment Count Limit_: Each road segment expands forward or spawns child road segments (branch) at each derivation step. This parameter controls the maximum amount of expansions a road segment can have.
+
+- _Derivation Step Limit_: Each derivation step is an opportunity for an existing road segments to expand or branch. This parameter controls the number of derivation steps.
+
+- _Street/Highway Segment Length/Width_: Road segments can be street or highways. This parameter controls their width/length (in world units).
+
+- _Street/Highway Branch Probability_: This parameter is the normalized (0-1) probability for a road segment to spawn another road segment.
+
+- _Street/Highway Branch Population_: **TODO**
+
+- _Street Branch Time Delay_: Number of derivation steps until the probability for streets to branch is evaluated.
+
+- _Minimum Intersection_ = **TODO**
+
+- _Snap Distance_: Road segments "snap" to each other in order to form network-like structures. This is the maximum distance (in world units) that a road segment can have from another until it's snapped.
+
+- _Allotment Min/Max Half Diagonal_: Building allotments are placed alongside road segments at a certain derivation interval. This is the min./max. diagonal size (in world units) of an allotment.
+
+- _Allotment Min/Max Aspect_: Once the diagonal size is sorted, the aspect length is sorted too. With the diagonal and aspect, we can define width and height. This controls the aspect (width / height) of the allotments.
+
+- _Allotment Placement Loop_: **TODO**
+
+- _Settlement Spawn Delay_: A settlement is a region where building allotments are placed. This parameter controls how many derivation steps needs to pass until a settlement can be randomly sorted.
+
+- _Settlement Radius_: This parameter controls the size of settlement from the point they started (in world units).
+
+- _Settlement Crossing/Highway Probabilities_: This parameter is the normalized (0-1) probability for a road segment that is either a highway or is in a crossing (i.e., has 2 orthogonal road segments connected to it) to spawn a settlement.
+
+- _Generate Highways/Streets_: Enable/disable the generation of highways/streets.
+
 
 ##### Script Execution Order
 
