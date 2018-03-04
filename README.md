@@ -33,9 +33,9 @@ It features:
 
 - _Derivation Step Limit_: Each derivation step is an opportunity for an existing road segments to expand or branch. This parameter controls the number of derivation steps.
 
-- _Street/Highway Segment Length/Width_: Road segments can be street or highways. This parameter controls their width/length (in world units).
+- _Street/Highway Segment Length/Width_: Road segments can be streets or highways. This parameter controls their width/length (in world units).
 
-- _Street/Highway Branch Probability_: This parameter is the normalized (0-1) probability for a road segment to spawn another road segment.
+- _Street/Highway Branch Probability_: This parameter is the normalized (0-1) probability of a road segment spawning another road segment.
 
 - _Street/Highway Branch Population_: **TODO**
 
@@ -55,7 +55,7 @@ It features:
 
 - _Settlement Radius_: This parameter controls the size of settlement from the point they started (in world units).
 
-- _Settlement Crossing/Highway Probabilities_: This parameter is the normalized (0-1) probability for a road segment that is either a highway or is in a crossing (i.e., has 2 orthogonal road segments connected to it) to spawn a settlement.
+- _Settlement Crossing/Highway Probabilities_: This parameter is the normalized (0-1) probability of a road segment that is either a highway or is in a crossing (i.e., has 2 orthogonal road segments connected to it) spawning a settlement.
 
 - _Generate Highways/Streets_: Enable/disable the generation of highways/streets.
 
