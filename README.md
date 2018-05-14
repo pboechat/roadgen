@@ -13,13 +13,13 @@ It features:
 ----------
 #### Getting Started
 
- 1. Add RoadNetwork to a game object in your scene an set generation parameters (ie.: street segment length)
+ 1. Add RoadNetwork to a game object in your scene an set generation parameters (e.g., street segment length)
  2. Add MockTerrain (or your own ITerrain implementation)
  3. [Optional] Add DummyAllotmentBuilder and RoadDensityMap. RoadDensityMap requires that you reference RoadNetwork.
  5. Add RoadDensityBasedSettlementSpawner (or your own settlement spawner implementation) and reference DummyAllotmentBuilder (or your own IAllotmentBuilder implementation) and RoadDensityMap
- 6. Add RoadNetworkMesh and set materials (road segments and crossing),  mesh granularity (length step) and reference to RoadNetwork and terrain
+ 6. Add RoadNetworkMesh and set materials (road segments and crossing),  mesh detail (e.g., length step) and reference to RoadNetwork and terrain
 
-![Example](http://www.pedroboechat.com/images/roadgen.png)
+![Example](http://pedroboechat.com/images/roadgen.png)
 
 ##### Generation Parameters
 
@@ -62,13 +62,13 @@ It features:
 
 ##### Script Execution Order
 
-![Script Execution Order](http://www.pedroboechat.com/images/roadgen-ScriptExecutionOrder.png)
+![Script Execution Order](http://pedroboechat.com/images/roadgen-ScriptExecutionOrder.png)
 
 ##### (Pseudo-)Randomness
 
 Add GlobalSeeder to a game object in your scene to control pseudo-random number generation.
 
-![Global Seeder](http://www.pedroboechat.com/images/roadgen-GlobalSeeder.png)
+![Global Seeder](http://pedroboechat.com/images/roadgen-GlobalSeeder.png)
 
 
 ----------
