@@ -1,7 +1,7 @@
 roadgen
 =======
 
-Road network generation tool based on [Müller et al.](https://github.com/pboechat/roadgen/blob/master/%282001%29%20Procedural%20Modeling%20of%20Cities.pdf). The basic idea is to extend L-System to support intersection and snapping (self-sensitivity) and be guided by image maps (population density).
+This is a road network generation tool based on [Müller et al.](https://github.com/pboechat/roadgen/blob/master/%282001%29%20Procedural%20Modeling%20of%20Cities.pdf). The basic idea is to extend L-Systems to support intersection and snapping (self-sensitivity) and be guided by image maps (population density).
 
 It features:
 
