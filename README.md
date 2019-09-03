@@ -201,15 +201,15 @@ Add GlobalSeeder to a game object in your scene to control pseudo-random number 
 	);
 		
 	List<Vector3> vertices = new List<Vector3>();
-        geometry.GetSegmentPositions().ForEach((p) =>
-        {
+	geometry.GetSegmentPositions().ForEach((p) =>
+	{
 		vertices.Add(new Vector3(p.x, heightmap.GetHeight(p.x, p.y), p.y));
-        });
-		
+	});
+
 	geometry.GetCrossingPositions().ForEach((p) =>
-        {
+	{
 		vertices.Add(new Vector3(p.x, heightmap.GetHeight(p.x, p.y), p.y));
-        });
+	});
 		
 	Mesh mesh = new Mesh();
 	mesh.vertices = vertices.ToArray();
