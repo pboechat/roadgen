@@ -76,151 +76,157 @@ Add GlobalSeeder to a game object in your scene to control pseudo-random number 
 
 ##### Road Network Generation
 
-		using System.Collections.Generic;
-		using RoadGen;
+	using System.Collections.Generic;
+	using RoadGen;
 
-		(...)
+	(...)
 
-		List<Segment> segments;
-		RoadGen.Quadtree quadtree;
-		RoadNetworkGenerator.DebugData debugData;
+	List<Segment> segments;
+	RoadGen.Quadtree quadtree;
+	RoadNetworkGenerator.DebugData debugData;
 
-		RoadNetworkGenerator.Generate(out segments, out quadtree, out debugData);
+	RoadNetworkGenerator.Generate(out segments, out quadtree, out debugData);
 
 ##### Road Network Traversal
 
 ###### Standard segment visitor
 
-		using System.Collections.Generic;
-		using RoadGen;
+	using System.Collections.Generic;
+	using RoadGen;
 
-		(...)
+	(...)
 
-		HashSet<Segment> visited = new HashSet<Segment>();
-		foreach (var segment in segments)
-			RoadNetworkTraversal.PreOrder(segment, (a) =>
+	HashSet<Segment> visited = new HashSet<Segment>();
+	foreach (var segment in segments)
+	{
+		RoadNetworkTraversal.PreOrder(segment, (a) =>
 			{
-				// my logic
+				// my visitation logic
 				return true;
 			}, 
 			mask, 
 			ref visited);
+	}
 			
 ###### Segment visitor w/ per-traversal parameter (Context)
 
-		using System.Collections.Generic;
-		using RoadGen;
+	using System.Collections.Generic;
+	using RoadGen;
 
-		(...)
+	(...)
 
-		struct MyContext
-		{
-			// my data
-		}
-		
-		(...)
-		
-		bool MyVisitor(Segment segment, ref MyContext myContext)
-		{
-			// my logic
-			return true;
-		}
-		
-		(...)
-		
-		HashSet<Segment> visited = new HashSet<Segment>();
-		MyContext myContext;
-        foreach (var segment in roadNetwork.Segments)
-            RoadNetworkTraversal.PreOrder(segment, 
-				ref myContext, 
-				MyVisitor, 
-				RoadNetworkTraversal.HIGHWAYS_MASK | RoadNetworkTraversal.STREETS_MASK, 
-				ref visited);
+	struct MyContext
+	{
+		// my data
+	}
+
+	(...)
+
+	bool MyVisitor(Segment segment, ref MyContext myContext)
+	{
+		// my visitation logic
+		return true;
+	}
+
+	(...)
+
+	HashSet<Segment> visited = new HashSet<Segment>();
+	MyContext myContext;
+	foreach (var segment in roadNetwork.Segments)
+	{
+		RoadNetworkTraversal.PreOrder(segment, 
+			ref myContext, 
+			MyVisitor, 
+			RoadNetworkTraversal.HIGHWAYS_MASK | RoadNetworkTraversal.STREETS_MASK, 
+			ref visited);
+	}
 
 ###### Segment visitor w/ per-segment parameter (User Data)
 
-		using System.Collections.Generic;
-		using RoadGen;
+	using System.Collections.Generic;
+	using RoadGen;
 
-		(...)
+	(...)
 
-		struct MyContext
-		{
-			// my context data
-		}
-		
-		struct MyUserData
-		{
-			// my user data
-		}
-		
-		(...)
-		
-		bool MyVisitor(Segment segment, ref MyContext myContext, MyUserData i_myUserData, out MyUserData o_myUserData)
-		{
-			o_myUserData = new MyUserData();
-			// my logic
-			return true;
-		}
-		
-		(...)
-		
-		HashSet<Segment> visited = new HashSet<Segment>();
-		MyContext myContext;
-		MyUserData myUserData;
-        foreach (var segment in roadNetwork.Segments)
-            RoadNetworkTraversal.PreOrder(segment, 
-				ref myContext, 
-				myUserData,
-				MyVisitor, 
-				RoadNetworkTraversal.HIGHWAYS_MASK | RoadNetworkTraversal.STREETS_MASK, 
-				ref visited);
+	struct MyContext
+	{
+		// my context data
+	}
+
+	struct MyUserData
+	{
+		// my user data
+	}
+
+	(...)
+
+	bool MyVisitor(Segment segment, ref MyContext myContext, MyUserData i_myUserData, out MyUserData o_myUserData)
+	{
+		o_myUserData = new MyUserData();
+		// my visitation logic
+		return true;
+	}
+
+	(...)
+
+	HashSet<Segment> visited = new HashSet<Segment>();
+	MyContext myContext;
+	MyUserData myUserData;
+	foreach (var segment in roadNetwork.Segments)
+	{
+		RoadNetworkTraversal.PreOrder(segment, 
+			ref myContext, 
+			myUserData,
+			MyVisitor, 
+			RoadNetworkTraversal.HIGHWAYS_MASK | RoadNetworkTraversal.STREETS_MASK, 
+			ref visited);
+	}
 
 ##### Road Network Geometry Construction
 
-		using UnityEngine;
-		using System.Collections.Generic;
-		using System.Linq;
-		using RoadGen;
+	using UnityEngine;
+	using System.Collections.Generic;
+	using System.Linq;
+	using RoadGen;
 
-		(...)
+	(...)
 
-		var geometry = RoadNetworkGeometryBuilder.Build(
-            scale,
-            Config.highwaySegmentWidth,
-            Config.streetSegmentWidth,
-            lengthStep,
-            segments,
-            RoadNetworkTraversal.HIGHWAYS_MASK | RoadNetworkTraversal.STREETS_MASK
-        );
+	var geometry = RoadNetworkGeometryBuilder.Build(
+		scale,
+		Config.highwaySegmentWidth,
+		Config.streetSegmentWidth,
+		lengthStep,
+		segments,
+		RoadNetworkTraversal.HIGHWAYS_MASK | RoadNetworkTraversal.STREETS_MASK
+	);
 		
-		List<Vector3> vertices = new List<Vector3>();
+	List<Vector3> vertices = new List<Vector3>();
         geometry.GetSegmentPositions().ForEach((p) =>
         {
-            vertices.Add(new Vector3(p.x, heightmap.GetHeight(p.x, p.y), p.y));
+		vertices.Add(new Vector3(p.x, heightmap.GetHeight(p.x, p.y), p.y));
         });
 		
-		geometry.GetCrossingPositions().ForEach((p) =>
+	geometry.GetCrossingPositions().ForEach((p) =>
         {
-            vertices.Add(new Vector3(p.x, heightmap.GetHeight(p.x, p.y), p.y));
+		vertices.Add(new Vector3(p.x, heightmap.GetHeight(p.x, p.y), p.y));
         });
 		
-		Mesh mesh = new Mesh();
-        mesh.vertices = vertices.ToArray();
-        mesh.triangles = geometry.GetCrossingIndices().ToArray();
-        mesh.uv = geometry.GetCrossingUvs().ToArray();
-        mesh.RecalculateNormals();
+	Mesh mesh = new Mesh();
+	mesh.vertices = vertices.ToArray();
+	mesh.triangles = geometry.GetCrossingIndices().ToArray();
+	mesh.uv = geometry.GetCrossingUvs().ToArray();
+	mesh.RecalculateNormals();
 		
 ##### Custom Heightmap
 
 Extend RoadGen.IHeightmap and implement:
 
-		float GetHeight(float x, float y);
+	float GetHeight(float x, float y);
 		
-		bool Finished();
+	bool Finished();
 
 ##### Custom Allotment Builder
 
 Extend RoadGen.IAllotmentBuilder and implement:
 
-		GameObject Build(Allotment allotment, IHeightmap heightmap);
+	GameObject Build(Allotment allotment, IHeightmap heightmap);
