@@ -82,7 +82,7 @@ Add GlobalSeeder to a game object in your scene to control pseudo-random number 
 	(...)
 
 	List<Segment> segments;
-	RoadGen.Quadtree quadtree;
+	Quadtree quadtree;
 	RoadNetworkGenerator.DebugData debugData;
 
 	RoadNetworkGenerator.Generate(out segments, out quadtree, out debugData);
