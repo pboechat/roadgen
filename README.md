@@ -23,7 +23,7 @@ It features:
 
 ##### Generation Parameters
 
-![Generation Parameters](http://www.pedroboechat.com/images/roadgen-RoadNetwork.png)
+![Generation Parameters](http://pedroboechat.com/images/roadgen-RoadNetwork.png)
 
 - _Quadtree Params_: The min. coordinates and size of the quatree (in world units) in which the road segments are put to optimize collision detections.
 
